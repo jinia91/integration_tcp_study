@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.integration.dsl.IntegrationFlow
 import org.springframework.integration.dsl.IntegrationFlows
+import org.springframework.integration.dsl.Transformers
 import org.springframework.integration.ip.dsl.Tcp
 import org.springframework.integration.ip.tcp.TcpInboundGateway
 
@@ -18,6 +19,7 @@ class TcpClientConfig {
         val gateway = outboundGateway.get()
         return IntegrationFlows.from("input")
             .handle(gateway)
+            .transform(Transformers.objectToString())
             .get()
     }
 }

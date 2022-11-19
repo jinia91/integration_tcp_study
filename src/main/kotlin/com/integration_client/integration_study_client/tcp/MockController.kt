@@ -10,6 +10,6 @@ class MockController(
 
     @RequestMapping("/")
     fun foo(): String{
-        return tcpClient.sendData("data".toByteArray()).toString()
+        return tcpClient.sendData("data".toByteArray())
     }
 }

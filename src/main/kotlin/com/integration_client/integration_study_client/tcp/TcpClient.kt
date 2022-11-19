@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component
 @Component
 interface TcpClient {
     @Gateway
-    fun sendData(byteArray: ByteArray): ByteArray
+    fun sendData(byteArray: ByteArray): String
 }
