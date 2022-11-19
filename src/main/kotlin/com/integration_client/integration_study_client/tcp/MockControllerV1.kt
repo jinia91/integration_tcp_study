@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class MockController(
+class MockControllerV1(
     private val tcpClient: TcpClient
 ) {
 
