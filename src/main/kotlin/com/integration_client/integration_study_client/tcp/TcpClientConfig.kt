@@ -11,14 +11,13 @@ import org.springframework.integration.ip.tcp.TcpInboundGateway
 class TcpClientConfig {
 
     @Bean
-    fun outbound(): IntegrationFlow {
+    fun outBound(): IntegrationFlow {
         val nioClient = Tcp.nioClient("localhost", 9191)
         val factory = nioClient.get()
         val outboundGateway = Tcp.outboundGateway(factory)
         val gateway = outboundGateway.get()
-        return IntegrationFlows.from("outBound")
+        return IntegrationFlows.from("input")
             .handle(gateway)
             .get()
     }
-
 }
