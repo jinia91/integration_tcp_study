@@ -11,11 +11,11 @@ class MockController(
 
     @RequestMapping("/hello")
     fun foo(): String{
-        return tcpClient.sendData("0001data")
+        return tcpClient.sendData("00120001data")
     }
 
     @RequestMapping("/bye")
     fun foo2(): String{
-        return tcpClient.sendData("0002data")
+        return tcpClient.sendData("00120002data")
     }
 }

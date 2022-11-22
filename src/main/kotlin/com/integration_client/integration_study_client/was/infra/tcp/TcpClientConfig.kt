@@ -6,7 +6,6 @@ import org.springframework.integration.dsl.IntegrationFlow
 import org.springframework.integration.dsl.IntegrationFlows
 import org.springframework.integration.dsl.Transformers
 import org.springframework.integration.ip.dsl.Tcp
-import org.springframework.integration.ip.tcp.TcpInboundGateway
 import org.springframework.integration.ip.tcp.TcpOutboundGateway
 
 @Configuration
@@ -22,8 +21,12 @@ class TcpConfig {
 
     @Bean
     fun outBoundGateway(): TcpOutboundGateway {
-        val nioClient = Tcp.nioClient("localhost", 9191)
-        val factory = nioClient.get()
+        val netClient = Tcp.netClient("localhost", 9191)
+        val factory = netClient.get()
+            .apply {
+                isSingleUse = true
+                isSoKeepAlive = true
+            }
         val outboundGateway = Tcp.outboundGateway(factory)
         return outboundGateway.get()
     }
