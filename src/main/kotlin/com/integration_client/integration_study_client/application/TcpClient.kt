@@ -1,4 +1,4 @@
-package com.integration_client.integration_study_client.tcp
+package com.integration_client.integration_study_client.application
 
 import org.springframework.integration.annotation.Gateway
 import org.springframework.integration.annotation.MessagingGateway
@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component
 @Component
 interface TcpClient {
     @Gateway
-    fun sendData(byteArray: ByteArray): String
+    fun sendData(input: String): String
 }
