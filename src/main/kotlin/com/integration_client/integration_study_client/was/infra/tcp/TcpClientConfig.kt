@@ -1,5 +1,6 @@
 package com.integration_client.integration_study_client.was.infra.tcp
 
+import StringLengthHeaderSerializer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.integration.dsl.IntegrationFlow
@@ -7,6 +8,7 @@ import org.springframework.integration.dsl.IntegrationFlows
 import org.springframework.integration.dsl.Transformers
 import org.springframework.integration.ip.dsl.Tcp
 import org.springframework.integration.ip.tcp.TcpOutboundGateway
+import org.springframework.integration.ip.tcp.connection.AbstractClientConnectionFactory
 
 @Configuration
 class TcpConfig {
@@ -22,10 +24,13 @@ class TcpConfig {
     @Bean
     fun outBoundGateway(): TcpOutboundGateway {
         val netClient = Tcp.netClient("localhost", 9191)
-        val factory = netClient.get()
+        val factory: AbstractClientConnectionFactory = netClient.get()
             .apply {
-                isSingleUse = true
+                isSingleUse = false
                 isSoKeepAlive = true
+                soTimeout = 0
+                deserializer = StringLengthHeaderSerializer()
+                serializer = StringLengthHeaderSerializer()
             }
         val outboundGateway = Tcp.outboundGateway(factory)
         return outboundGateway.get()

@@ -11,11 +11,19 @@ class MockController(
 
     @RequestMapping("/hello")
     fun foo(): String{
-        return tcpClient.sendData("00120001data")
+        val input = "0001data"
+        val output = tcpClient.sendData(input)
+        println(output)
+        return output
     }
 
     @RequestMapping("/bye")
     fun foo2(): String{
-        return tcpClient.sendData("00120002data")
+        return tcpClient.sendData("0002data")
     }
+
+//    @RequestMapping("/pub")
+//    fun foo3(): String{
+//        return tcpClient.sendData("00120003data".toByteArray(charset("MS949")))
+//    }
 }
